@@ -3,7 +3,8 @@
 require "spy_system"
 
 RSpec.describe "directories" do
-  let(:filesystem) { SpySystem::Real.new }
+  # let(:filesystem) { SpySystem::Real.new }
+  let(:filesystem) { SpySystem::Fake.new }
   let(:dir) { filesystem.dir }
 
   context "temporary directories" do
