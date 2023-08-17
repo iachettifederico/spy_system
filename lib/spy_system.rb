@@ -6,6 +6,12 @@ require "zeitwerk"
 loader = Zeitwerk::Loader.for_gem
 loader.setup
 
+require "awesome_print"
+AwesomePrint.defaults = {
+  indent: 2,
+  index:  false,
+}
+
 module SpySystem
   class Error < StandardError; end
 end

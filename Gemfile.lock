@@ -9,6 +9,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    awesome_print (1.9.2)
     base64 (0.1.1)
     diff-lcs (1.5.0)
     json (2.6.3)
@@ -57,6 +58,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  awesome_print (~> 1.9.2)
   rake (~> 13.0.6)
   rubocop (~> 1.56.0)
   spy_system!
