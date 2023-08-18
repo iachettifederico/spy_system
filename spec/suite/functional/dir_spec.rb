@@ -4,9 +4,10 @@ require "spy_system"
 
 RSpec.describe "directories" do
   let(:filesystem) { SpySystem::Fake.new }
+  # let(:filesystem) { SpySystem::Real.new }
   let(:dir) { filesystem.dir }
 
-  let(:home) { ENV["HOME"] }
+  let(:home) { Dir.home }
   let(:pwd) { `pwd`.chomp }
 
   context "temporary directories" do
@@ -71,9 +72,8 @@ RSpec.describe "directories" do
       end
     end
 
-
     it "defaults to the home directory" do
-      dir.mktmpdir do |directory|
+      dir.mktmpdir do |_directory|
         dir.chdir
 
         expect(dir.pwd).to eql(home)
@@ -85,7 +85,7 @@ RSpec.describe "directories" do
     it "does something" do
       dir.mktmpdir do |directory|
         dir.chdir(directory) do
-
+          puts "hoa"
         end
       end
     end

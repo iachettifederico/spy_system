@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "Temporary filesystem replacement for File, Dir and FileUtils"
   spec.homepage = "http://example.com"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 3.2.2"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "http://example.com"

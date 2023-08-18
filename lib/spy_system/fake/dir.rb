@@ -7,7 +7,7 @@ module SpySystem
         new(filesystem: filesystem)
       end
 
-      def mktmpdir(prefix_suffix="d", &)
+      def mktmpdir(prefix_suffix = "d", &)
         generate_directory_name(prefix_suffix).tap { |directory|
           yield directory if block_given?
         }
@@ -17,7 +17,7 @@ module SpySystem
         current_directory
       end
 
-      def chdir(path=ENV["HOME"], &block)
+      def chdir(path = Dir.home, &block)
         if block_given?
           old_directory = @current_directory
           @current_directory = path
