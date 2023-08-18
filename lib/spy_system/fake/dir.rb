@@ -17,15 +17,22 @@ module SpySystem
         current_directory
       end
 
-      def chdir(path=ENV["HOME"])
-        @current_directory = path
+      def chdir(path=ENV["HOME"], &block)
+        if block_given?
+          old_directory = @current_directory
+          @current_directory = path
+          block.call
+          @current_directory = old_directory
+        else
+          @current_directory = path
+        end
       end
-      
+
       private
 
       attr_reader :filesystem
       attr_reader :current_directory
-      
+
       def initialize(filesystem)
         @filesystem = filesystem
         @current_directory = `pwd`.chomp

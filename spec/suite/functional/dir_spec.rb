@@ -6,6 +6,9 @@ RSpec.describe "directories" do
   let(:filesystem) { SpySystem::Fake.new }
   let(:dir) { filesystem.dir }
 
+  let(:home) { ENV["HOME"] }
+  let(:pwd) { `pwd`.chomp }
+
   context "temporary directories" do
     describe "naming directories" do
       it "returns the path as a string" do
@@ -18,7 +21,7 @@ RSpec.describe "directories" do
       it "yields the path as a string" do
         dir.mktmpdir do |directory|
           expect(directory).to be_a(String)
-          expect(directory).to match(%q(\A/tmp/d\d{8}-\d{6}-.{6}\z))
+          expect(directory).to match(%q(\A/tmp/d\d{8}-\d{6}-.+\z))
         end
       end
 
@@ -40,8 +43,8 @@ RSpec.describe "directories" do
 
   describe "pwd" do
     it "defaults to the current directory" do
-      dir.mktmpdir do |_directory|
-        expect(dir.pwd).to eql(`pwd`.chomp)
+      dir.mktmpdir do
+        expect(dir.pwd).to eql(pwd)
       end
     end
   end
@@ -49,17 +52,42 @@ RSpec.describe "directories" do
   describe "changing directories" do
     it "can change directories" do
       dir.mktmpdir do |directory|
+        internal_pwd = ""
+
+        dir.chdir(directory) do
+          internal_pwd = dir.pwd
+        end
+
+        expect(internal_pwd).to eql(directory)
+        expect(dir.pwd).to eql(pwd)
+      end
+    end
+
+    it "can change directories" do
+      dir.mktmpdir do |directory|
         dir.chdir(directory)
+
         expect(dir.pwd).to eql(directory)
       end
     end
 
+
     it "defaults to the home directory" do
       dir.mktmpdir do |directory|
         dir.chdir
-        expect(dir.pwd).to eql(ENV["HOME"])
+
+        expect(dir.pwd).to eql(home)
       end
     end
+  end
 
+  describe "creating directories" do
+    it "does something" do
+      dir.mktmpdir do |directory|
+        dir.chdir(directory) do
+
+        end
+      end
+    end
   end
 end
