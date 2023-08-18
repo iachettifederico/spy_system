@@ -3,7 +3,6 @@
 require "spy_system"
 
 RSpec.describe "directories" do
-  # let(:filesystem) { SpySystem::Real.new }
   let(:filesystem) { SpySystem::Fake.new }
   let(:dir) { filesystem.dir }
 
@@ -40,7 +39,7 @@ RSpec.describe "directories" do
   end
 
   describe "pwd" do
-    it "xxxx" do
+    it "defaults to the current directory" do
       dir.mktmpdir do |_directory|
         expect(dir.pwd).to eql(`pwd`.chomp)
       end
@@ -48,14 +47,14 @@ RSpec.describe "directories" do
   end
 
   describe "changing directories" do
-    it "xxxx" do
+    it "can change directories" do
       dir.mktmpdir do |directory|
         dir.chdir(directory)
         expect(dir.pwd).to eql(directory)
       end
     end
 
-    it "xxxx" do
+    it "defaults to the home directory" do
       dir.mktmpdir do |directory|
         dir.chdir
         expect(dir.pwd).to eql(ENV["HOME"])
