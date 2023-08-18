@@ -38,4 +38,29 @@ RSpec.describe "directories" do
       end
     end
   end
+
+  describe "pwd" do
+    it "xxxx" do
+      dir.mktmpdir do |_directory|
+        expect(dir.pwd).to eql(`pwd`.chomp)
+      end
+    end
+  end
+
+  describe "changing directories" do
+    it "xxxx" do
+      dir.mktmpdir do |directory|
+        dir.chdir(directory)
+        expect(dir.pwd).to eql(directory)
+      end
+    end
+
+    it "xxxx" do
+      dir.mktmpdir do |directory|
+        dir.chdir
+        expect(dir.pwd).to eql(ENV["HOME"])
+      end
+    end
+
+  end
 end
