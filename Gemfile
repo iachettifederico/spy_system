@@ -7,4 +7,4 @@ gemspec
 
 gem "awesome_print", "~> 1.9.2"
 gem "rake", "~> 13.0.6"
-gem "rubocop", "~> 1.56.0"
+gem "rubocop", "~> 1.56.1"

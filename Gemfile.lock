@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     spy_system (0.1.0)
-      rspec (~> 3.12.0)
+      rspec-given (~> 3.8.2)
       zeitwerk (~> 2.6.11)
 
 GEM
@@ -12,6 +12,8 @@ GEM
     awesome_print (1.9.2)
     base64 (0.1.1)
     diff-lcs (1.5.0)
+    given_core (3.8.2)
+      sorcerer (>= 0.3.7)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
     parallel (1.23.0)
@@ -32,11 +34,14 @@ GEM
     rspec-expectations (3.12.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
+    rspec-given (3.8.2)
+      given_core (= 3.8.2)
+      rspec (>= 2.14.0)
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.1)
-    rubocop (1.56.0)
+    rubocop (1.56.1)
       base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -51,6 +56,7 @@ GEM
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
     ruby-progressbar (1.13.0)
+    sorcerer (2.0.1)
     unicode-display_width (2.4.2)
     zeitwerk (2.6.11)
 
@@ -60,7 +66,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print (~> 1.9.2)
   rake (~> 13.0.6)
-  rubocop (~> 1.56.0)
+  rubocop (~> 1.56.1)
   spy_system!
 
 BUNDLED WITH
