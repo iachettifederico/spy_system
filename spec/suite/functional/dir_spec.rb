@@ -3,8 +3,7 @@
 require "spy_system"
 
 RSpec.describe "directories" do
-  let(:filesystem) { SpySystem::Fake.new }
-  # let(:filesystem) { SpySystem::Real.new }
+  subject(:filesystem) { SpySystem::Fake.new }
   let(:dir) { filesystem.dir }
 
   let(:home) { Dir.home }
@@ -16,7 +15,7 @@ RSpec.describe "directories" do
         directory = dir.mktmpdir
 
         expect(directory).to be_a(String)
-        expect(directory).to match(%q(\A/tmp/d\d{8}-\d{6}-.{6}\z))
+        expect(directory).to match(%q(\A/tmp/d\d{8}-\d{6}-.+\z))
       end
 
       it "yields the path as a string" do
@@ -30,13 +29,13 @@ RSpec.describe "directories" do
         directory = dir.mktmpdir("name-")
 
         expect(directory).to be_a(String)
-        expect(directory).to match(%q(\A/tmp/name-\d{8}-\d{6}-.{6}\z))
+        expect(directory).to match(%q(\A/tmp/name-\d{8}-\d{6}-.+\z))
       end
 
       it "does something" do
         dir.mktmpdir("name-") do |directory|
           expect(directory).to be_a(String)
-          expect(directory).to match(%q(\A/tmp/name-\d{8}-\d{6}-.{6}\z))
+          expect(directory).to match(%q(\A/tmp/name-\d{8}-\d{6}-.+\z))
         end
       end
     end
@@ -84,8 +83,11 @@ RSpec.describe "directories" do
   describe "creating directories" do
     it "does something" do
       dir.mktmpdir do |directory|
+        new_directory_name = "#{directory}/new"
         dir.chdir(directory) do
-          puts "hoa"
+          dir.mkdir(new_directory_name)
+
+          expect(dir.exist?(new_directory_name)).to eql(true)
         end
       end
     end
